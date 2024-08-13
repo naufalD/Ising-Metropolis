@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
+#include <QElapsedTimer>
+#include <QMainWindow>
+#include <QLabel>
 
 #include "include/ising.h"
 #include "include/plot.h"
@@ -12,8 +15,19 @@ class MainWindow : public QWidget
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+
+protected:
+    virtual void timerEvent( QTimerEvent* ) QWT_OVERRIDE;
+
 private:
-    Ising ising;
+    Ising *m_isingSpace;
+    PlotIsing *m_isingPlot;
+    QLabel *m_label1;
+    QElapsedTimer m_timer;
+
+
+    int m_sizeX;
+    int m_sizeY;
+
 };
 #endif // MAINWINDOW_H

@@ -4,14 +4,14 @@
 #include <QwtPlot>
 #include <QwtPlotCurve>
 
-class Plot : public QwtPlot
+class PlotIsing : public QwtPlot
 {
 public:
-    Plot(QWidget *parent = NULL);
+    PlotIsing(int sizeX, int sizeY, QWidget *parent = NULL);
+    void plotUp(int x, int y);
+    void plotDown(int x, int y);
+    void updatePlot();
 private:
-    void m_plotUp();
-    void m_plotDown();
-
     QPolygonF m_pointsUp;
     QwtPlotCurve *m_curveUp;
     QPolygonF m_pointsDown;
