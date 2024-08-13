@@ -3,6 +3,9 @@
 
 #include <QWidget>
 
+#include "include/ising.h"
+#include "include/plot.h"
+
 class MainWindow : public QWidget
 {
     Q_OBJECT
@@ -10,5 +13,7 @@ class MainWindow : public QWidget
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+private:
+    Ising ising;
 };
 #endif // MAINWINDOW_H

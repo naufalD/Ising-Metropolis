@@ -46,5 +46,23 @@ double Ising::m_getEnergy(){
 }
 
 void Ising::m_update(){
+    int rand1 {0};
+    int energyTemp {0};
 
+    rand1 = arc4random() / pow(2,32)*m_sizeX*m_sizeY;
+
+    if (m_space[rand1] == 1) m_space[rand1] = 0;
+    else m_space[rand1] = 1;
+
+    energyTemp = m_getEnergy();
+
+    if (energyTemp <= m_energy) m_energy = energyTemp;
+    else{
+        double rand2 {arc4random()/pow(2,32)};
+        if (m_boltzmann(energyTemp)>=rand2) m_energy = energyTemp;
+        else{
+            if (m_space[rand1] == 1) m_space[rand1] = 0;
+            else m_space[rand1] = 1;
+        }
+    }
 }
