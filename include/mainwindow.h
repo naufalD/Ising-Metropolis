@@ -22,6 +22,7 @@ protected:
 private:
     Ising *m_isingSpace;
     PlotIsing *m_isingPlot;
+    PlotEnergy *m_energyPlot;
     QLabel *m_label1;
     QElapsedTimer m_timer;
 

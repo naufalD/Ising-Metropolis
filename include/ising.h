@@ -10,6 +10,7 @@ class Ising
 public:
     Ising(int sizeX, int sizeY, double J, double temp);
     bool getPoint(int X, int Y);
+    double getEnergy();
     void updateSpace();
 private:
     double m_boltzmann(double E);
