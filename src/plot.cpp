@@ -11,12 +11,12 @@ PlotIsing::PlotIsing(int sizeX, int sizeY, QWidget *parent) : QwtPlot(parent)
     setAxisScale( QwtAxis::XBottom, -1, sizeX );
 
     m_curveUp = new QwtPlotCurve();
-    m_curveUp->setPen(Qt::red, 2);
+    m_curveUp->setPen(Qt::red, 1.5);
     m_curveUp->setStyle(QwtPlotCurve::Dots);
     m_curveUp->attach(this);
 
     m_curveDown = new QwtPlotCurve();
-    m_curveDown->setPen(Qt::blue, 2);
+    m_curveDown->setPen(Qt::blue, 1.5);
     m_curveDown->setStyle(QwtPlotCurve::Dots);
     m_curveDown->attach(this);
 

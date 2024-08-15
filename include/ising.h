@@ -12,9 +12,11 @@ public:
     bool getPoint(int X, int Y);
     double getEnergy();
     void updateSpace();
+
 private:
     double m_boltzmann(double E);
     double m_getEnergy();
+    double m_getEnergyComp(int index);
 
     vector<bool> m_space;
     int m_sizeX;

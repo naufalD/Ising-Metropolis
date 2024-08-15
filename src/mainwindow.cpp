@@ -5,8 +5,8 @@
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
-    double J {1};
-    double temperature {2300};
+    double J {-1};
+    double temperature {100};
     m_sizeX = 200;
     m_sizeY = 200;
 
@@ -17,9 +17,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_label1 = new QLabel();
 
     QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->addWidget(m_isingPlot);
-    layout->addWidget(m_energyPlot);
-    layout->addWidget(m_label1);
+    layout->addWidget(m_isingPlot, 40);
+    layout->addWidget(m_energyPlot, 40);
+    layout->addWidget(m_label1, 10);
 
     startTimer(10);
     m_timer.start();
