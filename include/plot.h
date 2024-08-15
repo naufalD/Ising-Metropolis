@@ -18,11 +18,11 @@ private:
     QwtPlotCurve *m_curveDown;
 };
 
-class PlotEnergy : public QwtPlot
+class PlotParam : public QwtPlot
 {
 public:
-    PlotEnergy(QWidget *parent = nullptr);
-    void plot(int x, double y);
+    PlotParam(QWidget *parent = nullptr);
+    void plot(double x, double y);
 
 private:
     QPolygonF m_points;

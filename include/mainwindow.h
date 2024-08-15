@@ -22,7 +22,8 @@ protected:
 private:
     Ising *m_isingSpace;
     PlotIsing *m_isingPlot;
-    PlotEnergy *m_energyPlot;
+    PlotParam *m_energyPlot;
+    PlotParam *m_magnetizationPlot;
     QLabel *m_label1;
     QElapsedTimer m_timer;
 

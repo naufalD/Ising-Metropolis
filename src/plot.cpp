@@ -42,9 +42,8 @@ void PlotIsing::updatePlot(){
 }
 
 
-PlotEnergy::PlotEnergy(QWidget *parent) : QwtPlot(parent)
+PlotParam::PlotParam(QWidget *parent) : QwtPlot(parent)
 {
-    setTitle( "Energy" );
     setCanvasBackground( Qt::white );
     setMinimumSize(300,300);
     QwtPlotGrid* grid = new QwtPlotGrid();
@@ -56,7 +55,7 @@ PlotEnergy::PlotEnergy(QWidget *parent) : QwtPlot(parent)
     m_curve->setRenderHint(QwtPlotItem::RenderAntialiased, true);
     m_curve->attach(this);
 }
-void PlotEnergy::plot(int x, double y){
+void PlotParam::plot(double x, double y){
     m_points<<QPointF(x, y);
     m_curve->setSamples(m_points);
     replot();

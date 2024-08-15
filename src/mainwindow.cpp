@@ -6,20 +6,26 @@ MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
     double J {-1};
-    double temperature {100};
+    double temperature {2.5};
     m_sizeX = 200;
     m_sizeY = 200;
 
     m_isingSpace = new Ising(m_sizeX, m_sizeY, J, temperature);
     m_isingPlot = new PlotIsing(m_sizeX, m_sizeY);
-    m_energyPlot = new PlotEnergy();
-
+    m_energyPlot = new PlotParam();
+    m_magnetizationPlot = new PlotParam();
     m_label1 = new QLabel();
+
+    m_energyPlot->setTitle("Energy");
+    m_magnetizationPlot->setTitle("Magnetization");
+
+    QVBoxLayout *layout1 = new QVBoxLayout();
+    layout1->addWidget(m_magnetizationPlot);
+    layout1->addWidget(m_energyPlot);
 
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->addWidget(m_isingPlot, 40);
-    layout->addWidget(m_energyPlot, 40);
-    layout->addWidget(m_label1, 10);
+    layout->addLayout(layout1);
 
     startTimer(10);
     m_timer.start();
@@ -34,9 +40,11 @@ void MainWindow::timerEvent( QTimerEvent* ){
             }
         }
         double energyTemp {m_isingSpace->getEnergy()};
-        m_energyPlot->plot(m_timer.elapsed(), energyTemp);
+        double magTemp {m_isingSpace->getMagnetization()};
+        m_energyPlot->plot(static_cast<double>(m_timer.elapsed())*0.001, energyTemp);
+        m_magnetizationPlot->plot(static_cast<double>(m_timer.elapsed())*0.001, magTemp);
         m_isingPlot->updatePlot();
         m_isingSpace->updateSpace();
-        m_label1->setText(QString::number(energyTemp));
+        //m_label1->setText(QString::number(energyTemp));
 }
 

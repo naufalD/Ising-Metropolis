@@ -6,10 +6,17 @@ Ising::Ising(int sizeX, int sizeY, double J, double temp) {
     m_sizeX = sizeX;
     m_sizeY = sizeY;
 
+    for (int j {0}; j<sizeY;++j){
+        for (int i {0}; i<sizeX;++i){
+            double tempRand {arc4random()/pow(2,32)};
+            if (tempRand<0.4) m_space[i*m_sizeX + j] = 1;
+            else m_space[i*m_sizeX + j]=0;
+        }
+    }
+
     // for (int j {0}; j<sizeY;++j){
     //     for (int i {0}; i<sizeX;++i){
-    //         double tempRand {arc4random()/pow(2,32)};
-    //         if (tempRand<0.4) m_space[i*m_sizeX + j] = 1;
+    //         if ((i*m_sizeX+j)%2==1) m_space[i*m_sizeX + j] = 1;
     //         else m_space[i*m_sizeX + j]=0;
     //     }
     // }
@@ -17,7 +24,8 @@ Ising::Ising(int sizeX, int sizeY, double J, double temp) {
 
     m_J = J;
     m_temp = temp;
-    m_energy = m_getEnergy();
+    m_setEnergy();
+    m_setMagnetization();
 }
 
 bool Ising::getPoint(int X, int Y){
@@ -26,6 +34,10 @@ bool Ising::getPoint(int X, int Y){
 
 double Ising::getEnergy(){
     return m_energy;
+}
+
+double Ising::getMagnetization(){
+    return m_magnetization;
 }
 
 void Ising::updateSpace(){
@@ -50,7 +62,8 @@ void Ising::updateSpace(){
             }
         }
     }
-    m_energy = m_getEnergy();
+    m_setEnergy();
+    m_setMagnetization();
 }
 
 
@@ -58,7 +71,7 @@ double Ising::m_boltzmann(double E){
     return exp(2*E/(m_temp));
 }
 
-double Ising::m_getEnergy(){
+void Ising::m_setEnergy(){
     float energy {0};
     for (int j {0}; j<m_sizeY;++j){
         for (int i {0}; i<m_sizeX;++i){
@@ -109,7 +122,7 @@ double Ising::m_getEnergy(){
         }
     }
 
-    return -m_J*energy;
+    m_energy = -m_J*energy;
 }
 
 double Ising::m_getEnergyComp(int index){
@@ -159,4 +172,13 @@ double Ising::m_getEnergyComp(int index){
         else energyTemp+= -1;
     }
     return -m_J*energyTemp*spinCurr;
+}
+
+void Ising::m_setMagnetization(){
+    int tempMag {0};
+    for (int i {0}; i<m_sizeX*m_sizeY;++i){
+        if (m_space[i] == 1) tempMag+=1;
+        else tempMag += -1;
+    }
+    m_magnetization = static_cast<double>(tempMag)/(m_sizeX*m_sizeY);
 }

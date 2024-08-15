@@ -11,12 +11,14 @@ public:
     Ising(int sizeX, int sizeY, double J, double temp);
     bool getPoint(int X, int Y);
     double getEnergy();
+    double getMagnetization();
     void updateSpace();
 
 private:
     double m_boltzmann(double E);
-    double m_getEnergy();
+    void m_setEnergy();
     double m_getEnergyComp(int index);
+    void m_setMagnetization();
 
     vector<bool> m_space;
     int m_sizeX;
@@ -24,6 +26,7 @@ private:
     double m_J;
     double m_temp;
     double m_energy;
+    double m_magnetization;
 
 };
 
